@@ -1,10 +1,10 @@
-using SAE.GAD170.P1.CBC;
+//using SAE.GAD170.P1.CBC;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace SAE.GAD170.See.P1.Player
 {
-    public class Player : CharacterBaseClass
+    public class Player //: CharacterBaseClass
     {
         private Karma playerKarma;
 

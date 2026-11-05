@@ -1,0 +1,24 @@
+using UnityEngine;
+
+public class GridSpawnPattern : SpawnPattern
+{
+    [SerializeField, Min(1)] private int columns = 3;
+    [SerializeField, Min(1)] private int rows = 2;
+
+    [SerializeField] private Vector2 spacing = new Vector2(2f, 2f);
+
+    public override Vector3 GetSpawnPosition(int spawnIndex)
+    {
+        // converts spawnIndex into a grid coordinate
+        // ensure index is in range of the grid, if outside, repeat
+        int i = spawnIndex % (columns * rows);
+        int column = i % columns;
+        int row = i / columns;
+
+        // centre the grid around the pattern's position
+        float x = (column - (columns - 1) / 2f) * spacing.x;
+        float z = ((rows - 1) / 2f - row) * spacing.y;
+
+        return transform.position + new Vector3(x, spawnY, z);
+    }
+}
