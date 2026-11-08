@@ -24,6 +24,7 @@ public class Karma : MonoBehaviour
 
     [SerializeField]
     private int currentBadKarmaValue = 0;
+    #endregion
 
     #region Karma Status
     [Header("Karma Status Thresholds")]
@@ -117,28 +118,17 @@ public class Karma : MonoBehaviour
 
     // public int CheckKarmaValueAndAddStats
     // {
-    //     get { 
+    //     get {
     //         if(currentGoodKarmaValue > goodThreshold)
     //         {
-                
+
     //         }
 
     //      }
-    // } // 
+    // } //
     public int publicCurrentBadKarmaValue
     {
         get { return currentBadKarmaValue; }
     } // it is pretty much a get function every time it is called it gets the value, recalculating it.
-    #endregion
-
-    #endregion
-
-
-    #region Unity Start & Update
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start() { }
-
-    // Update is called once per frame
-    void Update() { }
     #endregion
 }

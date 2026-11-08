@@ -1,4 +1,4 @@
-using SAE.GAD170.See.P1.Player;
+using SAE.GAD176.See.P1.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
