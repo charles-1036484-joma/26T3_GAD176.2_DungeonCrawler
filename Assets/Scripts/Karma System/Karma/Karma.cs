@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -10,6 +12,7 @@ namespace KarmaSystem
         {
             Good,
             Evil,
+            Neutral,
         }
 
         #region KARMA ALIGNMENT - Good or Evil Stat variables
@@ -27,7 +30,7 @@ namespace KarmaSystem
         #endregion
 
 
-        #region Karma Alignment Thresholds
+        #region KARMA ALIGNMENT THRESHOLDS
 
         [Header("Alignment Thresholds")]
         // <===================Evil Threshold Tiers=================> //
@@ -67,9 +70,9 @@ namespace KarmaSystem
         #endregion
 
 
-        #region OnKarmaChanged Event
+        #region UNITY EVENT
 
-        public UnityEvent<int, KarmaStatus> onKarmaChanged = new UnityEvent<int, KarmaStatus>(); // I made this protected, in future when i expand this system I may need another class inheriting from Karma
+        public UnityEvent onKarmaChanged = new UnityEvent();
 
         private void OnEnable()
         {
@@ -94,78 +97,104 @@ namespace KarmaSystem
 
         // #endregion
 
-        #region Functions to allow changing of Karma externally
+        #region CUSTOM FUNCTIONS
 
-        // This is the only way to change Karma, positive numbers add and negative subtract
-        // // This is then used to determine, bad, neutral or good
-        // public void AddGoodKarma(int amount)
-        // {
-        //     currentGoodKarmaValue += amount;
-        //     Debug.Log("Karma has changed by: " + amount);
-        //     // Since this changes Karma so we need to call it/invoke it
-        //     // onKarmaChanged?.Invoke(currentKarmaValue, CurrentStatus);
-        //     Debug.Log("You are Character is: " + CurrentStatus);
-        // }
-
-        // public void AddBadKarma(int amount)
-        // {
-        //     currentBadKarmaValue += amount;
-        //     Debug.Log("Karma has changed by: " + amount);
-        //     // Since this changes Karma so we need to call it/invoke it
-        //     // onKarmaChanged?.Invoke(currentKarmaValue, CurrentStatus);
-        //     Debug.Log("You are Character is: " + CurrentStatus);
-        // }
-
-        // This is a read-only property, when you use this 'CurrentStatus' it will get and return the result of the if value
-        // I only want this script to be able to influence currentStatus
-        // public KarmaStatus CurrentStatus
-        // {
-        //     get
-        //     {
-        //         // Neutral Cases
-        //         if (
-        //             currentGoodKarmaValue <= goodThreshold && currentBadKarmaValue < badThreshold
-        //             || currentGoodKarmaValue >= goodThreshold && currentBadKarmaValue >= badThreshold
-        //         )
-        //         {
-        //             Debug.Log("Your Character is Neutral");
-        //             return KarmaStatus.Neutral;
-        //         }
-        //         if (currentGoodKarmaValue >= goodThreshold && currentBadKarmaValue <= badThreshold)
-        //         {
-        //             Debug.Log("Your Character is Good");
-        //             return KarmaStatus.Good;
-        //         }
-        //         if (currentBadKarmaValue >= badThreshold && currentGoodKarmaValue < goodThreshold)
-        //         {
-        //             Debug.Log("Your Character is Bad");
-        //             return KarmaStatus.Bad;
-        //         }
-        //         Debug.Log("Your Character is Neutral");
-        //         return KarmaStatus.Neutral;
-        //     }
-        // }
-
-        // These are the Getter functions to create accessibility across other scripts, they simply return the respective variables
-        public int publicCurrentGoodKarmaValue
+        public void AddKarma(string alignment, int amount)
         {
-            get { return currentGoodKarmaValue; }
-        } // the => is shorthand return get method
+            if (alignment == "Good")
+            {
+                Debug.Log("This was a good act");
+                currentKarmaValue += amount;
+            }
+            if (alignment == "Evil")
+            {
+                Debug.Log("This was a bad act");
+                ;
+                currentKarmaValue -= amount;
+            }
+        }
 
-        // public int CheckKarmaValueAndAddStats
-        // {
-        //     get {
-        //         if(currentGoodKarmaValue > goodThreshold)
-        //         {
-
-        //         }
-
-        //      }
-        // } //
-        public int publicCurrentBadKarmaValue
-        {
-            get { return currentBadKarmaValue; }
-        } // it is pretty much a get function every time it is called it gets the value, recalculating it.
         #endregion
+
+        #region GETTER FUNCTIONS
+
+
+        public int GetCurrentKarmaValue
+        {
+            get { return Mathf.Clamp(currentKarmaValue, pureEvilKarmaValue, pureGoodKarmaValue); }
+        }
+
+        public KarmaStatus GetCurrentKarmaLeaning
+        {
+            get
+            {
+                if (GetCurrentKarmaValue < goodAlignmentThresholdZero)
+                {
+                    if (GetCurrentKarmaValue < 0)
+                    {
+                        return KarmaStatus.Evil;
+                    }
+                    else if (GetCurrentKarmaValue > 0)
+                    {
+                        return KarmaStatus.Good;
+                    }
+                }
+                return KarmaStatus.Neutral;
+            }
+        }
+
+        public int GetKarmaTier
+        {
+            get
+            {
+                if (GetCurrentKarmaValue < 0)
+                {
+                    if (GetCurrentKarmaValue <= evilAlignmentThresholdFour)
+                    {
+                        return 5;
+                    }
+                    else if (GetCurrentKarmaValue <= evilAlignmentThresholdThree)
+                    {
+                        return 4;
+                    }
+                    else if (GetCurrentKarmaValue <= evilAlignmentThresholdTwo)
+                    {
+                        return 2;
+                    }
+                    else if (GetCurrentKarmaValue <= evilAlignmentThresholdOne)
+                    {
+                        return 1;
+                    }
+                }
+                else if (GetCurrentKarmaValue > 0)
+                {
+                    if (GetCurrentKarmaValue >= goodAlignmentThresholdFour)
+                    {
+                        return 5;
+                    }
+                    else if (GetCurrentKarmaValue >= goodAlignmentThresholdThree)
+                    {
+                        return 4;
+                    }
+                    else if (GetCurrentKarmaValue >= goodAlignmentThresholdTwo)
+                    {
+                        return 3;
+                    }
+                    else if (GetCurrentKarmaValue >= goodAlignmentThresholdOne)
+                    {
+                        return 2;
+                    }
+                    else if (GetCurrentKarmaValue >= goodAlignmentThresholdZero)
+                    {
+                        return 1;
+                    }
+                }
+
+                return 0;
+            }
+        }
+
+        #endregion
+    
     }
 }

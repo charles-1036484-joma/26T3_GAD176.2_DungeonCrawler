@@ -1,36 +1,44 @@
 using UnityEngine;
 
- // THIS CLASS SHOULD ONLY DEAL WITH THE KARMA TIERS
- // I WANT TO USE PROGRAMMABLE OBJECTS
-public class KarmaTier : MonoBehaviour
+// THIS CLASS SHOULD ONLY DEAL WITH THE KARMA TIERS
+// I WANT TO USE PROGRAMMABLE OBJECTS
+namespace KarmaSystem
 {
-   
-
-    [SerializeField]
-    private int currentKarmaTier = 1;
-
-    [SerializeField]
-    private int MaxKarmaTier = 10;
-
-    // I need Karma Tiers or Thresholds
-    // What are those levels, how many tiers their ? 5 or maybe i make the number of tiers editable
-    // Each Tier will 100 Karma points
-    // Good & Bad Tier Thresholds
-    // Tier 1 = 0 - 100
-    // Tier 2 = 200 - 300
-    // Tier 3 = 300 - 400
-    // Tier 4 = 400 - 500
-    // What will differentiate the two types of Karma points ?
-    // A: A charge either negative of positive
-
-    public int PublicCurrentKarmaTier
+    public class KarmaTier : MonoBehaviour
     {
-        get { return currentKarmaTier; }
-    }
+        [SerializeField]
+        private int currentKarmaTier = 1;
 
+        [SerializeField]
+        private int MaxKarmaTier = 10;
 
-    void Update()
-    {
-        
+        public Karma karma;
+
+        private void OnEnable()
+        {
+            karma.onKarmaChanged.AddListener(DisplayKarmaTier);
+        }
+
+        private void OnDisable()
+        {
+            karma.onKarmaChanged.RemoveListener(DisplayKarmaTier);
+        }
+
+        public void DisplayKarmaLeaning()
+        {
+            Debug.Log(karma.GetCurrentKarmaLeaning);
+        }
+
+        public void DisplayKarmaTier()
+        {
+            Debug.Log($"Tier: {karma.GetKarmaTier} {karma.GetCurrentKarmaLeaning} ");
+        }
+
+        void Update()
+        {
+            DisplayKarmaLeaning();
+            DisplayKarmaTier();
+            if (karma.onKarmaChanged != null) { }
+        }
     }
 }

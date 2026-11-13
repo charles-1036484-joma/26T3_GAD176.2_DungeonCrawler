@@ -47,7 +47,7 @@ public class StatsManager : MonoBehaviour
         // Add good karma to player
         // playerKarma.AddGoodKarma(10);
         // Adjust the good karma slider, add the value to the slider
-        GoodSlider.value = playerKarma.publicCurrentGoodKarmaValue;
+        // GoodSlider.value = playerKarma.;
         // this just uses the get as the callback function, but i want to make the function it invokes more useful rather than just a get.
         // playerKarma.onKarmaChanged.Invoke(
         //     playerKarma.publicCurrentGoodKarmaValue,
@@ -56,36 +56,33 @@ public class StatsManager : MonoBehaviour
         Destroy(collision.gameObject);
     }
 
-    public void UpdateBadAct(Collision collision)
-    {
-        // playerKarma.AddBadKarma(10);
-        Debug.Log(BadSlider.value);
-        BadSlider.value = playerKarma.publicCurrentBadKarmaValue;
-        // playerKarma.onKarmaChanged.Invoke(
-        //     playerKarma.publicCurrentGoodKarmaValue,
-        //     playerKarma.CurrentStatus
-        // );
-        Destroy(collision.gameObject);
-    }
+    // public void UpdateBadAct(Collision collision)
+    // {
+    //     // playerKarma.AddBadKarma(10);
+    //     Debug.Log(BadSlider.value);
+    //     // BadSlider.value = playerKarma.publicCurrentBadKarmaValue;
+    //     // playerKarma.onKarmaChanged.Invoke(
+    //     //     playerKarma.publicCurrentGoodKarmaValue,
+    //     //     playerKarma.CurrentStatus
+    //     // );
+    //     Destroy(collision.gameObject);
+    // }
 
-    public void UpdateBigBadAct(Collision collision)
-    {
-        // playerKarma.AddBadKarma(30);
-        Debug.Log(BadSlider.value);
-        BadSlider.value = playerKarma.publicCurrentBadKarmaValue;
-        // playerKarma.onKarmaChanged.Invoke(
-        //     playerKarma.publicCurrentGoodKarmaValue,
-        //     playerKarma.CurrentStatus
-        // );
-        Destroy(collision.gameObject);
-    }
+    // public void UpdateBigBadAct(Collision collision)
+    // {
+    //     // playerKarma.AddBadKarma(30);
+    //     Debug.Log(BadSlider.value);
+    //     // BadSlider.value = playerKarma.publicCurrentBadKarmaValue;
+    //     // playerKarma.onKarmaChanged.Invoke(
+    //     //     playerKarma.publicCurrentGoodKarmaValue,
+    //     //     playerKarma.CurrentStatus
+    //     // );
+    //     Destroy(collision.gameObject);
+    // }
     #endregion
 
     #region Unity Specific functions
-    void Awake()
-    {
-        playerKarmaTier = player.playerKarmaTier.PublicCurrentKarmaTier;
-    }
+    void Awake() { }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -1,7 +1,7 @@
+using KarmaSystem;
 using SAE.GAD176.P1.CBC;
 using UnityEngine;
 using UnityEngine.UI;
-using KarmaSystem;
 
 namespace KarmaSystem
 {
@@ -9,7 +9,7 @@ namespace KarmaSystem
     {
         private Karma playerKarma;
 
-        public KarmaTier playerKarmaTier;
+        private KarmaTier playerKarmaTier;
 
         // public Movement playerSpeed; Commenting out for the time being, need to focus on the essentials
 
@@ -40,7 +40,10 @@ namespace KarmaSystem
             // statsManager = GetComponent<StatsManager>();
         }
 
-        void Start() { }
+        void Start()
+        {
+            // Debug.Log(playerKarmaTier.);
+        }
 
         // Update is called once per frame
         void Update()
@@ -56,26 +59,26 @@ namespace KarmaSystem
             */
         }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.tag == "GoodAct")
-            {
-                statsManager.UpdateGoodAct(collision);
-            }
-            if (collision.gameObject.tag == "BadAct")
-            {
-                statsManager.UpdateBadAct(collision);
-            }
-            if (collision.gameObject.tag == "BigBadAct")
-            {
-                statsManager.UpdateBigBadAct(collision);
-            }
+        // private void OnCollisionEnter(Collision collision)
+        // {
+        //     if (collision.gameObject.tag == "GoodAct")
+        //     {
+        //         statsManager.UpdateGoodAct(collision);
+        //     }
+        //     if (collision.gameObject.tag == "BadAct")
+        //     {
+        //         statsManager.UpdateBadAct(collision);
+        //     }
+        //     if (collision.gameObject.tag == "BigBadAct")
+        //     {
+        //         statsManager.UpdateBigBadAct(collision);
+        //     }
 
-            if (collision.gameObject.tag == "Neutral")
-            {
-                return;
-            }
-        }
+        //     if (collision.gameObject.tag == "Neutral")
+        //     {
+        //         return;
+        //     }
+        // }
         #endregion
     }
 }
