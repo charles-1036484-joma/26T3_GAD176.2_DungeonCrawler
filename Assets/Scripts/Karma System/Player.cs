@@ -1,19 +1,20 @@
 using SAE.GAD176.P1.CBC;
 using UnityEngine;
 using UnityEngine.UI;
+using KarmaSystem;
 
-namespace SAE.GAD176.See.P1.Player
+namespace KarmaSystem
 {
     public class Player : CharacterBaseClass
     {
         private Karma playerKarma;
 
-        public Level playerLevel;
+        public KarmaTier playerKarmaTier;
 
-        public Movement playerSpeed;
+        // public Movement playerSpeed; Commenting out for the time being, need to focus on the essentials
 
-        [SerializeField]
-        private int playerFearFactor;
+        // [SerializeField]
+        // private int playerFearFactor;
 
         [SerializeField]
         private int playerJumpHeight;
@@ -34,8 +35,8 @@ namespace SAE.GAD176.See.P1.Player
         {
             // I do not need these here.
             playerKarma = GetComponent<Karma>(); // Get the Karma "Component" that is attached to the object this Script is attached to
-            playerLevel = GetComponent<Level>();
-            playerSpeed = GetComponent<Movement>();
+            playerKarmaTier = GetComponent<KarmaTier>();
+            // playerSpeed = GetComponent<Movement>();
             // statsManager = GetComponent<StatsManager>();
         }
 
