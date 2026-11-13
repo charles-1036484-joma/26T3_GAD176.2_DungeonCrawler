@@ -1,0 +1,5 @@
+
+##### Add Karma()
+
+This function now takes two parameters an alignment (Good or bad) and a value,
+In the adds or takes away karma accordingly 
