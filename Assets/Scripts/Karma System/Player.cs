@@ -1,19 +1,20 @@
-using SAE.GAD170.P1.CBC;
+using KarmaSystem;
+using SAE.GAD176.P1.CBC;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SAE.GAD170.See.P1.Player
+namespace KarmaSystem
 {
     public class Player : CharacterBaseClass
     {
         private Karma playerKarma;
 
-        public Level playerLevel;
+        private KarmaTier playerKarmaTier;
 
-        public Movement playerSpeed;
+        // public Movement playerSpeed; Commenting out for the time being, need to focus on the essentials
 
-        [SerializeField]
-        private int playerFearFactor;
+        // [SerializeField]
+        // private int playerFearFactor;
 
         [SerializeField]
         private int playerJumpHeight;
@@ -21,7 +22,7 @@ namespace SAE.GAD170.See.P1.Player
         [SerializeField]
         private StatsManager statsManager;
 
-        protected Karma.KarmaStatus type;
+        protected Karma.KarmaAlignment type;
 
         // [SerializeField]
         // private Slider GoodSlider;
@@ -34,12 +35,15 @@ namespace SAE.GAD170.See.P1.Player
         {
             // I do not need these here.
             playerKarma = GetComponent<Karma>(); // Get the Karma "Component" that is attached to the object this Script is attached to
-            playerLevel = GetComponent<Level>();
-            playerSpeed = GetComponent<Movement>();
+            playerKarmaTier = GetComponent<KarmaTier>();
+            // playerSpeed = GetComponent<Movement>();
             // statsManager = GetComponent<StatsManager>();
         }
 
-        void Start() { }
+        void Start()
+        {
+            // Debug.Log(playerKarmaTier.);
+        }
 
         // Update is called once per frame
         void Update()
@@ -55,26 +59,26 @@ namespace SAE.GAD170.See.P1.Player
             */
         }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.tag == "GoodAct")
-            {
-                statsManager.UpdateGoodAct(collision);
-            }
-            if (collision.gameObject.tag == "BadAct")
-            {
-                statsManager.UpdateBadAct(collision);
-            }
-            if (collision.gameObject.tag == "BigBadAct")
-            {
-                statsManager.UpdateBigBadAct(collision);
-            }
+        // private void OnCollisionEnter(Collision collision)
+        // {
+        //     if (collision.gameObject.tag == "GoodAct")
+        //     {
+        //         statsManager.UpdateGoodAct(collision);
+        //     }
+        //     if (collision.gameObject.tag == "BadAct")
+        //     {
+        //         statsManager.UpdateBadAct(collision);
+        //     }
+        //     if (collision.gameObject.tag == "BigBadAct")
+        //     {
+        //         statsManager.UpdateBigBadAct(collision);
+        //     }
 
-            if (collision.gameObject.tag == "Neutral")
-            {
-                return;
-            }
-        }
+        //     if (collision.gameObject.tag == "Neutral")
+        //     {
+        //         return;
+        //     }
+        // }
         #endregion
     }
 }
