@@ -128,18 +128,14 @@ namespace KarmaSystem
         {
             get
             {
-                if (GetCurrentKarmaValue <= goodAlignmentThresholdZero)
+                if (GetCurrentKarmaValue < 0)
                 {
-                    if (GetCurrentKarmaValue < 0)
-                    {
-                        return KarmaAlignment.Evil;
-                    }
-                    else if (GetCurrentKarmaValue > 0)
-                    {
-                        return KarmaAlignment.Good;
-                    }
+                    return KarmaAlignment.Good;
                 }
-                return KarmaAlignment.Neutral;
+                else
+                {
+                    return KarmaAlignment.Evil;
+                }
             }
         }
 

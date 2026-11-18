@@ -16,12 +16,12 @@ namespace KarmaSystem
 
         private void OnEnable()
         {
-            karma.onKarmaChanged.AddListener(DisplayKarmaTier);
+            // karma.onKarmaTierChanged.AddListener(DisplayKarmaTier);
         }
 
         private void OnDisable()
         {
-            karma.onKarmaChanged.RemoveListener(DisplayKarmaTier);
+            // karma.onKarmaTierChanged.RemoveListener(DisplayKarmaTier);
         }
 
         public void DisplayKarmaLeaning()
@@ -38,7 +38,7 @@ namespace KarmaSystem
         {
             DisplayKarmaLeaning();
             DisplayKarmaTier();
-            if (karma.onKarmaChanged != null) { }
+            if (karma.onKarmaTierChanged != null) { }
         }
     }
 }
