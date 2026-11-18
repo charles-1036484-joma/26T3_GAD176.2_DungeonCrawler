@@ -8,11 +8,10 @@ namespace KarmaSystem
 {
     public class Karma : MonoBehaviour
     {
-        public enum KarmaStatus
+        public enum KarmaAlignment
         {
             Good,
             Evil,
-            Neutral,
         }
 
         #region KARMA ALIGNMENT - Good or Evil Stat variables
@@ -72,7 +71,8 @@ namespace KarmaSystem
 
         #region UNITY EVENT
 
-        public UnityEvent onKarmaChanged = new UnityEvent();
+        public UnityEvent<int, KarmaAlignment> onKarmaTierChanged =
+            new UnityEvent<int, KarmaAlignment>();
 
         private void OnEnable()
         {
@@ -83,13 +83,13 @@ namespace KarmaSystem
 
         // I WILL NEED TO USE THESE FUNCTIONS LATER WHEN LISTENING TO PROXIMITY, THEY WORK BUT NOT FOR MY PURPOSE ATM
         // #region Event Listener functions
-        // public void SubscribeToKarmaListener(UnityAction<int, KarmaStatus> listener)
+        // public void SubscribeToKarmaListener(UnityAction<int, KarmaAlignment> listener)
         // {
         //     onKarmaChanged.AddListener(listener);
         //     Debug.Log("SubscribeToKarmaListener Called");
         // }
 
-        // public void UnsubscribeFromKarmaListener(UnityAction<int, KarmaStatus> listener)
+        // public void UnsubscribeFromKarmaListener(UnityAction<int, KarmaAlignment> listener)
         // {
         //     onKarmaChanged.RemoveListener(listener);
         //     Debug.Log("UnsubscribeFromKarmaListener Called");
@@ -124,22 +124,22 @@ namespace KarmaSystem
             get { return Mathf.Clamp(currentKarmaValue, pureEvilKarmaValue, pureGoodKarmaValue); }
         }
 
-        public KarmaStatus GetCurrentKarmaLeaning
+        public KarmaAlignment GetCurrentKarmaLeaning
         {
             get
             {
-                if (GetCurrentKarmaValue < goodAlignmentThresholdZero)
+                if (GetCurrentKarmaValue <= goodAlignmentThresholdZero)
                 {
                     if (GetCurrentKarmaValue < 0)
                     {
-                        return KarmaStatus.Evil;
+                        return KarmaAlignment.Evil;
                     }
                     else if (GetCurrentKarmaValue > 0)
                     {
-                        return KarmaStatus.Good;
+                        return KarmaAlignment.Good;
                     }
                 }
-                return KarmaStatus.Neutral;
+                return KarmaAlignment.Neutral;
             }
         }
 
@@ -195,6 +195,5 @@ namespace KarmaSystem
         }
 
         #endregion
-    
     }
 }

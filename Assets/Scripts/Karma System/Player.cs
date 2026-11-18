@@ -22,7 +22,7 @@ namespace KarmaSystem
         [SerializeField]
         private StatsManager statsManager;
 
-        protected Karma.KarmaStatus type;
+        protected Karma.KarmaAlignment type;
 
         // [SerializeField]
         // private Slider GoodSlider;
