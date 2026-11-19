@@ -41,9 +41,9 @@ namespace KarmaSystem
 
         void Update()
         {
-            DisplayKarmaLeaning();
-            DisplayKarmaTier();
-            if (karma.onKarmaTierChanged != null) { }
+            // DisplayKarmaLeaning();
+            // DisplayKarmaTier();
+            // if (karma.onKarmaTierChanged != null) { }
         }
     }
 }

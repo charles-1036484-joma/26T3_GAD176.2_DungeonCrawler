@@ -99,6 +99,8 @@ namespace KarmaSystem
 
         #region CUSTOM FUNCTIONS
 
+        // I need a function to check if the Karma Tier has changed
+
         public void AddKarma(KarmaAlignment alignment, int amount)
         {
             if (alignment == KarmaAlignment.Good)
@@ -114,11 +116,23 @@ namespace KarmaSystem
             }
 
             currentKarmaValue = Mathf.Clamp(
-                currentKarmaValue,
-                pureEvilKarmaValue,
-                pureGoodKarmaValue
+                currentKarmaValue, // the current value
+                pureEvilKarmaValue, // The pure evil value
+                pureGoodKarmaValue // The pure good value
             ); // Clamp the karma value between -1000 and 1000 to make sure it does not go past either.
+
+            //<======= Comment out later ==========>//
             Debug.Log("Karma changed by " + amount + ". Now " + currentKarmaValue);
+            Debug.Log(
+                "Karma is now "
+                    + currentKarmaValue
+                    + " (Tier "
+                    + GetKarmaTier
+                    + " "
+                    + GetCurrentKarmaLeaning
+                    + ")"
+            );
+            //<======= Comment out later ==========>//
         }
 
         #endregion
@@ -137,11 +151,13 @@ namespace KarmaSystem
             {
                 if (GetCurrentKarmaValue < 0)
                 {
-                    return KarmaAlignment.Good;
+                    Debug.Log("Current Leaning is evil");
+                    return KarmaAlignment.Evil;
                 }
                 else
                 {
-                    return KarmaAlignment.Evil;
+                    Debug.Log("Current Leaning in Good");
+                    return KarmaAlignment.Good;
                 }
             }
         }
@@ -161,6 +177,10 @@ namespace KarmaSystem
                         return 4;
                     }
                     else if (GetCurrentKarmaValue <= evilAlignmentThresholdTwo)
+                    {
+                        return 3;
+                    }
+                    else if (GetCurrentKarmaValue <= evilAlignmentThresholdOne)
                     {
                         return 2;
                     }
