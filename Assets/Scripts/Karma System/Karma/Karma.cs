@@ -101,8 +101,13 @@ namespace KarmaSystem
 
         // I need a function to check if the Karma Tier has changed
 
+       
         public void AddKarma(KarmaAlignment alignment, int amount)
         {
+            // First get the current Tier and current alignment, store them in temps
+            int tierBefore = GetKarmaTier;
+            KarmaAlignment leaningBefore = GetCurrentKarmaLeaning;
+
             if (alignment == KarmaAlignment.Good)
             {
                 Debug.Log("This was a good act");
@@ -133,6 +138,20 @@ namespace KarmaSystem
                     + ")"
             );
             //<======= Comment out later ==========>//
+
+            // Check if the karma tier has changed
+            // CheckKarmaTierChange();
+        }
+
+        private void CheckKarmaTierChange(int tierBeforeChange, KarmaAlignment alignmentBeforeChange)
+        {
+            int tempTierAfter = GetKarmaTier;
+            KarmaAlignment tempAlignmentAfter = GetCurrentKarmaLeaning;
+
+            // if(tierBeforeChange == tempAlignmentAfter)
+            // {
+                
+            // }
         }
 
         #endregion

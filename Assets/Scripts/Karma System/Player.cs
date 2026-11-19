@@ -1,8 +1,5 @@
 using KarmaSystem;
-using SAE.GAD176.P1.CBC;
 using UnityEngine;
-using UnityEngine.UI;
-
 namespace KarmaSystem
 {
     public class Player : CharacterBaseClass
