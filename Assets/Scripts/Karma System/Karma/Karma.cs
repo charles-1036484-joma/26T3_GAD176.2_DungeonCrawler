@@ -8,11 +8,10 @@ namespace KarmaSystem
 {
     public class Karma : MonoBehaviour
     {
-        public enum KarmaStatus
+        public enum KarmaAlignment
         {
             Good,
             Evil,
-            Neutral,
         }
 
         #region KARMA ALIGNMENT - Good or Evil Stat variables
@@ -72,7 +71,8 @@ namespace KarmaSystem
 
         #region UNITY EVENT
 
-        public UnityEvent onKarmaChanged = new UnityEvent();
+        public UnityEvent<int, KarmaAlignment> onKarmaChanged =
+            new UnityEvent<int, KarmaAlignment>();
 
         private void OnEnable()
         {
@@ -83,13 +83,13 @@ namespace KarmaSystem
 
         // I WILL NEED TO USE THESE FUNCTIONS LATER WHEN LISTENING TO PROXIMITY, THEY WORK BUT NOT FOR MY PURPOSE ATM
         // #region Event Listener functions
-        // public void SubscribeToKarmaListener(UnityAction<int, KarmaStatus> listener)
+        // public void SubscribeToKarmaListener(UnityAction<int, KarmaAlignment> listener)
         // {
         //     onKarmaChanged.AddListener(listener);
         //     Debug.Log("SubscribeToKarmaListener Called");
         // }
 
-        // public void UnsubscribeFromKarmaListener(UnityAction<int, KarmaStatus> listener)
+        // public void UnsubscribeFromKarmaListener(UnityAction<int, KarmaAlignment> listener)
         // {
         //     onKarmaChanged.RemoveListener(listener);
         //     Debug.Log("UnsubscribeFromKarmaListener Called");
@@ -99,19 +99,34 @@ namespace KarmaSystem
 
         #region CUSTOM FUNCTIONS
 
-        public void AddKarma(string alignment, int amount)
+        public void AddKarma(KarmaAlignment alignment, int amount)
         {
-            if (alignment == "Good")
+            if (alignment == KarmaAlignment.Good)
             {
                 Debug.Log("This was a good act");
-                currentKarmaValue += amount;
+                currentKarmaValue += Mathf.Abs(amount);
             }
-            if (alignment == "Evil")
+            else
             {
                 Debug.Log("This was a bad act");
-                ;
-                currentKarmaValue -= amount;
+                currentKarmaValue -= Math.Abs(amount);
             }
+
+            currentKarmaValue = Mathf.Clamp(
+                currentKarmaValue,
+                pureEvilKarmaValue,
+                pureGoodKarmaValue
+            );
+
+            Debug.Log(
+                "Karma is now "
+                    + currentKarmaValue
+                    + " (Tier "
+                    + GetKarmaTier
+                    + " "
+                    + GetCurrentKarmaLeaning
+                    + ")"
+            );
         }
 
         #endregion
@@ -124,22 +139,18 @@ namespace KarmaSystem
             get { return Mathf.Clamp(currentKarmaValue, pureEvilKarmaValue, pureGoodKarmaValue); }
         }
 
-        public KarmaStatus GetCurrentKarmaLeaning
+        public KarmaAlignment GetCurrentKarmaLeaning
         {
             get
             {
-                if (GetCurrentKarmaValue < goodAlignmentThresholdZero)
+                if (GetCurrentKarmaValue < 0)
                 {
-                    if (GetCurrentKarmaValue < 0)
-                    {
-                        return KarmaStatus.Evil;
-                    }
-                    else if (GetCurrentKarmaValue > 0)
-                    {
-                        return KarmaStatus.Good;
-                    }
+                    return KarmaAlignment.Evil;
                 }
-                return KarmaStatus.Neutral;
+                else
+                {
+                    return KarmaAlignment.Good;
+                }
             }
         }
 
@@ -159,9 +170,13 @@ namespace KarmaSystem
                     }
                     else if (GetCurrentKarmaValue <= evilAlignmentThresholdTwo)
                     {
-                        return 2;
+                        return 3;
                     }
                     else if (GetCurrentKarmaValue <= evilAlignmentThresholdOne)
+                    {
+                        return 2;
+                    }
+                    else if (GetCurrentKarmaValue <= evilAlignmentThresholdZero)
                     {
                         return 1;
                     }
@@ -195,6 +210,5 @@ namespace KarmaSystem
         }
 
         #endregion
-    
     }
 }
