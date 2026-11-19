@@ -124,24 +124,24 @@ namespace KarmaSystem
             get { return Mathf.Clamp(currentKarmaValue, pureEvilKarmaValue, pureGoodKarmaValue); }
         }
 
-        public KarmaAlignment GetCurrentKarmaLeaning
-        {
-            get
-            {
-                if (GetCurrentKarmaValue <= goodAlignmentThresholdZero)
-                {
-                    if (GetCurrentKarmaValue < 0)
-                    {
-                        return KarmaAlignment.Evil;
-                    }
-                    else if (GetCurrentKarmaValue > 0)
-                    {
-                        return KarmaAlignment.Good;
-                    }
-                }
-                return KarmaAlignment.Neutral;
-            }
-        }
+        //public KarmaAlignment GetCurrentKarmaLeaning
+        //{
+        //    //get
+        //    //{
+        //    //    if (GetCurrentKarmaValue <= goodAlignmentThresholdZero)
+        //    //    {
+        //    //        if (GetCurrentKarmaValue < 0)
+        //    //        {
+        //    //            return KarmaAlignment.Evil;
+        //    //        }
+        //    //        else if (GetCurrentKarmaValue > 0)
+        //    //        {
+        //    //            return KarmaAlignment.Good;
+        //    //        }
+        //    //    }
+        //    //    return KarmaAlignment.Neutral;
+        //    //}
+        //}
 
         public int GetKarmaTier
         {
