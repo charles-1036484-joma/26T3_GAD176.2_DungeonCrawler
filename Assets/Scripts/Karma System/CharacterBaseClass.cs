@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SAE.GAD176.P1.CBC
+namespace KarmaSystem
 {
     public class CharacterBaseClass : MonoBehaviour
     {

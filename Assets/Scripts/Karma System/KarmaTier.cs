@@ -16,12 +16,17 @@ namespace KarmaSystem
 
         private void OnEnable()
         {
-            karma.onKarmaChanged.AddListener(DisplayKarmaTier);
+            karma.onKarmaTierChanged.AddListener(KarmaTierChangedCallback);
         }
 
         private void OnDisable()
         {
-            karma.onKarmaChanged.RemoveListener(DisplayKarmaTier);
+            karma.onKarmaTierChanged.RemoveListener(KarmaTierChangedCallback);
+        }
+
+        public void KarmaTierChangedCallback(int tier, Karma.KarmaAlignment alignment)
+        {
+            Debug.Log("Karma tier changed. Tier " + tier + " " + alignment);
         }
 
         public void DisplayKarmaLeaning()
@@ -36,9 +41,9 @@ namespace KarmaSystem
 
         void Update()
         {
-            DisplayKarmaLeaning();
-            DisplayKarmaTier();
-            if (karma.onKarmaChanged != null) { }
+            // DisplayKarmaLeaning();
+            // DisplayKarmaTier();
+            // if (karma.onKarmaTierChanged != null) { }
         }
     }
 }

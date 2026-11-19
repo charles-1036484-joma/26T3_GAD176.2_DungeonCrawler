@@ -516,6 +516,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425190271}
   m_CullTransparentMesh: 1
+--- !u!114 &446027814 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2221007143885427362, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
+  m_PrefabInstance: {fileID: 7366328075686450916}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c318c693608414ce689dbf28077efb4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &476670563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,7 +1029,7 @@ MonoBehaviour:
   GoodKarmaBar: {fileID: 585399009}
   BadKarmaBar: {fileID: 1245155186}
   player: {fileID: 298246007}
-  playerLevel: 0
+  playerKarmaTier: 0
   playerKarma: {fileID: 298246008}
   playerSpeed: 0
   GoodSlider: {fileID: 585399009}
@@ -1038,13 +1049,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cbeffa76c33940d09d6924e47309037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPointOne: {fileID: 0}
-  spawnPointTwo: {fileID: 0}
-  spawnPointThree: {fileID: 0}
-  spawnPointFour: {fileID: 0}
-  spawnPointFive: {fileID: 0}
-  spawnPointSix: {fileID: 0}
-  spawnPointSeven: {fileID: 0}
 --- !u!1 &846724717
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,6 +2685,26 @@ PrefabInstance:
       propertyPath: GoodKarmaBar
       value: 
       objectReference: {fileID: 585399009}
+    - target: {fileID: -5600923798911969657, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
+      propertyPath: currentKarmaValue
+      value: -350
+      objectReference: {fileID: 0}
+    - target: {fileID: -5600923798911969657, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
+      propertyPath: onKarmaChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5600923798911969657, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
+      propertyPath: onKarmaChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -5600923798911969657, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
+      propertyPath: onKarmaChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2221007143885427362, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
+      propertyPath: karma
+      value: 
+      objectReference: {fileID: 298246008}
     - target: {fileID: 1400830363005254519, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2737,6 +2761,10 @@ PrefabInstance:
       propertyPath: statsManager
       value: 
       objectReference: {fileID: 805315557}
+    - target: {fileID: 7779840787187620766, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
+      propertyPath: playerKarmaTier
+      value: 
+      objectReference: {fileID: 446027814}
     - target: {fileID: 8856502025641103335, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2761,7 +2789,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 14.51
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2079349815447114256, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1400830363005254519, guid: f4e1a001252cc4cc895b55117bfd64e5, type: 3}
