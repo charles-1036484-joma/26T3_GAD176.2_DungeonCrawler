@@ -16,12 +16,17 @@ namespace KarmaSystem
 
         private void OnEnable()
         {
-            // karma.onKarmaTierChanged.AddListener(DisplayKarmaTier);
+            karma.onKarmaTierChanged.AddListener(KarmaTierChangedCallback);
         }
 
         private void OnDisable()
         {
-            // karma.onKarmaTierChanged.RemoveListener(DisplayKarmaTier);
+            karma.onKarmaTierChanged.RemoveListener(KarmaTierChangedCallback);
+        }
+
+        public void KarmaTierChangedCallback(int tier, Karma.KarmaAlignment alignment)
+        {
+            Debug.Log("Karma tier changed. Tier " + tier + " " + alignment);
         }
 
         public void DisplayKarmaLeaning()

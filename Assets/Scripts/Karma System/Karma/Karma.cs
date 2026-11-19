@@ -99,19 +99,26 @@ namespace KarmaSystem
 
         #region CUSTOM FUNCTIONS
 
-        public void AddKarma(string alignment, int amount)
+        public void AddKarma(KarmaAlignment alignment, int amount)
         {
-            if (alignment == "Good")
+            if (alignment == KarmaAlignment.Good)
             {
                 Debug.Log("This was a good act");
-                currentKarmaValue += amount;
+                currentKarmaValue += Mathf.Abs(amount);
             }
-            if (alignment == "Evil")
+            else
             {
                 Debug.Log("This was a bad act");
                 ;
-                currentKarmaValue -= amount;
+                currentKarmaValue -= Mathf.Abs(amount);
             }
+
+            currentKarmaValue = Mathf.Clamp(
+                currentKarmaValue,
+                pureEvilKarmaValue,
+                pureGoodKarmaValue
+            ); // Clamp the karma value between -1000 and 1000 to make sure it does not go past either.
+            Debug.Log("Karma changed by " + amount + ". Now " + currentKarmaValue);
         }
 
         #endregion
