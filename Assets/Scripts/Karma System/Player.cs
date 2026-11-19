@@ -1,8 +1,5 @@
 using KarmaSystem;
-using SAE.GAD176.P1.CBC;
 using UnityEngine;
-using UnityEngine.UI;
-
 namespace KarmaSystem
 {
     public class Player : CharacterBaseClass
@@ -22,7 +19,7 @@ namespace KarmaSystem
         [SerializeField]
         private StatsManager statsManager;
 
-        protected Karma.KarmaStatus type;
+        protected Karma.KarmaAlignment type;
 
         // [SerializeField]
         // private Slider GoodSlider;

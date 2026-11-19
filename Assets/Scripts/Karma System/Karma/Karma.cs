@@ -8,11 +8,10 @@ namespace KarmaSystem
 {
     public class Karma : MonoBehaviour
     {
-        public enum KarmaStatus
+        public enum KarmaAlignment
         {
             Good,
             Evil,
-            Neutral,
         }
 
         #region KARMA ALIGNMENT - Good or Evil Stat variables
@@ -72,7 +71,8 @@ namespace KarmaSystem
 
         #region UNITY EVENT
 
-        public UnityEvent onKarmaChanged = new UnityEvent();
+        public UnityEvent<int, KarmaAlignment> onKarmaTierChanged =
+            new UnityEvent<int, KarmaAlignment>();
 
         private void OnEnable()
         {
@@ -83,13 +83,13 @@ namespace KarmaSystem
 
         // I WILL NEED TO USE THESE FUNCTIONS LATER WHEN LISTENING TO PROXIMITY, THEY WORK BUT NOT FOR MY PURPOSE ATM
         // #region Event Listener functions
-        // public void SubscribeToKarmaListener(UnityAction<int, KarmaStatus> listener)
+        // public void SubscribeToKarmaListener(UnityAction<int, KarmaAlignment> listener)
         // {
         //     onKarmaChanged.AddListener(listener);
         //     Debug.Log("SubscribeToKarmaListener Called");
         // }
 
-        // public void UnsubscribeFromKarmaListener(UnityAction<int, KarmaStatus> listener)
+        // public void UnsubscribeFromKarmaListener(UnityAction<int, KarmaAlignment> listener)
         // {
         //     onKarmaChanged.RemoveListener(listener);
         //     Debug.Log("UnsubscribeFromKarmaListener Called");
@@ -99,19 +99,59 @@ namespace KarmaSystem
 
         #region CUSTOM FUNCTIONS
 
-        public void AddKarma(string alignment, int amount)
+        // I need a function to check if the Karma Tier has changed
+
+       
+        public void AddKarma(KarmaAlignment alignment, int amount)
         {
-            if (alignment == "Good")
+            // First get the current Tier and current alignment, store them in temps
+            int tierBefore = GetKarmaTier;
+            KarmaAlignment leaningBefore = GetCurrentKarmaLeaning;
+
+            if (alignment == KarmaAlignment.Good)
             {
                 Debug.Log("This was a good act");
-                currentKarmaValue += amount;
+                currentKarmaValue += Mathf.Abs(amount);
             }
-            if (alignment == "Evil")
+            else
             {
                 Debug.Log("This was a bad act");
                 ;
-                currentKarmaValue -= amount;
+                currentKarmaValue -= Mathf.Abs(amount);
             }
+
+            currentKarmaValue = Mathf.Clamp(
+                currentKarmaValue, // the current value
+                pureEvilKarmaValue, // The pure evil value
+                pureGoodKarmaValue // The pure good value
+            ); // Clamp the karma value between -1000 and 1000 to make sure it does not go past either.
+
+            //<======= Comment out later ==========>//
+            Debug.Log("Karma changed by " + amount + ". Now " + currentKarmaValue);
+            Debug.Log(
+                "Karma is now "
+                    + currentKarmaValue
+                    + " (Tier "
+                    + GetKarmaTier
+                    + " "
+                    + GetCurrentKarmaLeaning
+                    + ")"
+            );
+            //<======= Comment out later ==========>//
+
+            // Check if the karma tier has changed
+            // CheckKarmaTierChange();
+        }
+
+        private void CheckKarmaTierChange(int tierBeforeChange, KarmaAlignment alignmentBeforeChange)
+        {
+            int tempTierAfter = GetKarmaTier;
+            KarmaAlignment tempAlignmentAfter = GetCurrentKarmaLeaning;
+
+            // if(tierBeforeChange == tempAlignmentAfter)
+            // {
+                
+            // }
         }
 
         #endregion
@@ -124,22 +164,20 @@ namespace KarmaSystem
             get { return Mathf.Clamp(currentKarmaValue, pureEvilKarmaValue, pureGoodKarmaValue); }
         }
 
-        public KarmaStatus GetCurrentKarmaLeaning
+        public KarmaAlignment GetCurrentKarmaLeaning
         {
             get
             {
-                if (GetCurrentKarmaValue < goodAlignmentThresholdZero)
+                if (GetCurrentKarmaValue < 0)
                 {
-                    if (GetCurrentKarmaValue < 0)
-                    {
-                        return KarmaStatus.Evil;
-                    }
-                    else if (GetCurrentKarmaValue > 0)
-                    {
-                        return KarmaStatus.Good;
-                    }
+                    Debug.Log("Current Leaning is evil");
+                    return KarmaAlignment.Evil;
                 }
-                return KarmaStatus.Neutral;
+                else
+                {
+                    Debug.Log("Current Leaning in Good");
+                    return KarmaAlignment.Good;
+                }
             }
         }
 
@@ -158,6 +196,10 @@ namespace KarmaSystem
                         return 4;
                     }
                     else if (GetCurrentKarmaValue <= evilAlignmentThresholdTwo)
+                    {
+                        return 3;
+                    }
+                    else if (GetCurrentKarmaValue <= evilAlignmentThresholdOne)
                     {
                         return 2;
                     }
@@ -195,6 +237,5 @@ namespace KarmaSystem
         }
 
         #endregion
-    
     }
 }
