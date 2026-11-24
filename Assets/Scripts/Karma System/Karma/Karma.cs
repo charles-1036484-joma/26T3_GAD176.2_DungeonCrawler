@@ -259,5 +259,45 @@ namespace KarmaSystem
         }
 
         #endregion
+
+        #region CONTEXT MENU TESTS
+
+        [ContextMenu("Test Good 100")]
+        private void TestGood100()
+        {
+            AddKarma(KarmaAlignment.Good, 100);
+        }
+
+        [ContextMenu("Test Good 500")]
+        private void TestGood500()
+        {
+            AddKarma(KarmaAlignment.Good, 500);
+        }
+
+        [ContextMenu("Test Good 1000")]
+        private void TestGood1000()
+        {
+            AddKarma(KarmaAlignment.Good, 500);
+        }
+
+        [ContextMenu("Test Evil 100")]
+        private void TestEvil100()
+        {
+            AddKarma(KarmaAlignment.Evil, 100);
+        }
+
+        [ContextMenu("Test Evil 500")]
+        private void TestEvil500()
+        {
+            AddKarma(KarmaAlignment.Evil, 500);
+        }
+
+        [ContextMenu("Test Evil 1000")]
+        private void TestEvil1000()
+        {
+            AddKarma(KarmaAlignment.Evil, 1000);
+        }
+
+        #endregion
     }
 }
