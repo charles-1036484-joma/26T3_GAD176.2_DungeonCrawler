@@ -24,7 +24,6 @@ namespace KarmaSystem
 
         #endregion
 
-
         #region KARMA ALIGNMENT THRESHOLDS
 
         [Header("Alignment Thresholds")]
@@ -78,11 +77,7 @@ namespace KarmaSystem
         private void Update() { }
         #endregion
 
-
-        #region UNITY EVENT
-
-
-        #endregion
+        #region UNITY EVENT // DON'T NEED
 
         // I WILL NEED TO USE THESE FUNCTIONS LATER WHEN LISTENING TO PROXIMITY, THEY WORK BUT NOT FOR MY PURPOSE ATM
         // #region Event Listener functions
@@ -98,7 +93,7 @@ namespace KarmaSystem
         //     Debug.Log("UnsubscribeFromKarmaListener Called");
         // }
 
-        // #endregion
+        #endregion
 
         #region CUSTOM FUNCTIONS
 
@@ -179,7 +174,7 @@ namespace KarmaSystem
 
         #region GETTER FUNCTIONS
 
-
+        // Public Getter, that returns the current Karma Value but clamps it between -1000 and 1000
         public int GetCurrentKarmaValue
         {
             get { return Mathf.Clamp(currentKarmaValue, pureEvilKarmaValue, pureGoodKarmaValue); }

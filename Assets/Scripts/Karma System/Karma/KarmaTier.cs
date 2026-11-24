@@ -6,12 +6,6 @@ namespace KarmaSystem
 {
     public class KarmaTier : MonoBehaviour
     {
-        // [SerializeField]
-        // private int currentKarmaTier = 1;
-
-        // [SerializeField]
-        // private int MaxKarmaTier = 10;
-
         public Karma karma;
 
         private void OnEnable()
@@ -26,7 +20,9 @@ namespace KarmaSystem
 
         public void KarmaTierChangedCallback(int tier, Karma.KarmaAlignment alignment)
         {
-            Debug.Log("KarmaTierChangedCallback: Karma tier changed. Tier " + tier + " " + alignment);
+            Debug.Log(
+                "KarmaTierChangedCallback: Karma tier changed. Tier " + tier + " " + alignment
+            );
         }
 
         public void DisplayKarmaLeaning()
