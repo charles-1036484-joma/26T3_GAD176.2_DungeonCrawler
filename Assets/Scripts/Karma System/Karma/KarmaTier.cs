@@ -6,27 +6,27 @@ namespace KarmaSystem
 {
     public class KarmaTier : MonoBehaviour
     {
-        [SerializeField]
-        private int currentKarmaTier = 1;
+        // [SerializeField]
+        // private int currentKarmaTier = 1;
 
-        [SerializeField]
-        private int MaxKarmaTier = 10;
+        // [SerializeField]
+        // private int MaxKarmaTier = 10;
 
         public Karma karma;
 
         private void OnEnable()
         {
-            karma.onKarmaTierChanged.AddListener(KarmaTierChangedCallback);
+            GameEvents.onKarmaChange.AddListener(KarmaTierChangedCallback);
         }
 
         private void OnDisable()
         {
-            karma.onKarmaTierChanged.RemoveListener(KarmaTierChangedCallback);
+            GameEvents.onKarmaChange.RemoveListener(KarmaTierChangedCallback);
         }
 
         public void KarmaTierChangedCallback(int tier, Karma.KarmaAlignment alignment)
         {
-            Debug.Log("Karma tier changed. Tier " + tier + " " + alignment);
+            // Debug.Log("KarmaTierChangedCallback: Karma tier changed. Tier " + tier + " " + alignment);
         }
 
         public void DisplayKarmaLeaning()
@@ -36,14 +36,14 @@ namespace KarmaSystem
 
         public void DisplayKarmaTier()
         {
-            Debug.Log($"Tier: {karma.GetKarmaTier} {karma.GetCurrentKarmaLeaning} ");
+            Debug.Log($"Tier: {karma.GetCurrentKarmaTier} {karma.GetCurrentKarmaLeaning} ");
         }
 
         void Update()
         {
             // DisplayKarmaLeaning();
             // DisplayKarmaTier();
-            // if (karma.onKarmaTierChanged != null) { }
+            // if (karma.onKarmaChange != null) { }
         }
     }
 }
