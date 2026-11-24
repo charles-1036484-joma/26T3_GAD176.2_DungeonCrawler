@@ -1,5 +1,24 @@
 
-##### Add Karma()
 
-This function now takes two parameters an alignment (Good or bad) and a value,
-In the adds or takes away karma accordingly 
+#### Decoupling
+
+OnKarmaChanged Action - The Karma System knows nothing about the 'Enemy', Knows nothing
+about the Level Generator, It is just shouting, Hey something has happened, here are the details
+
+Used an 'Action' to maintain decoupling, reducing dependencies between components 
+
+
+#### Game Events 
+
+#### Character Base Class
+
+#### Karma
+
+-  Add Karma()
+    This function now takes two parameters an alignment (Good or Evil) and a value,
+    In the adds or takes away karma accordingly 
+
+
+#### Enemy Spawner 
+
+Enemy spawner needs to Subscribe and Add its methods to the onKarmaChanged event. 

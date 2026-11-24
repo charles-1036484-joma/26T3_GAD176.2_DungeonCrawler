@@ -74,6 +74,7 @@ namespace KarmaSystem
         {
             // I need a listener with a callback
             // onLevelGenerated.AddListener(A function here that);
+            // GameEvents.onKarmaChange +=
         }
 
         private void Start() { }
@@ -159,7 +160,8 @@ namespace KarmaSystem
 
             if (tierBeforeAddingKarma != tierAfterAddingKarma)
             {
-                GameEvents.onKarmaChange.Invoke(tierAfterAddingKarma, alignmentAfterAddingKarma);
+                // Check if the event is null. If it is not, invoke() the event/action
+                GameEvents.OnKarmaChange?.Invoke(tierAfterAddingKarma, alignmentAfterAddingKarma);
                 Debug.Log($"Karma Tier has changed, Character is Tier {tierAfterAddingKarma}");
             }
 
@@ -254,34 +256,6 @@ namespace KarmaSystem
 
                 return 0;
             }
-        }
-
-        #endregion
-
-        #region TEMPORARY TESTS
-
-        [ContextMenu("Test Good 100")] // Adds a menu item in the Inspector called Test Good 100
-        private void TestGood100()
-        {
-            AddKarma(KarmaAlignment.Good, 100); // Pretend the player did a good act worth 100
-        }
-
-        [ContextMenu("Test Evil 100")] // Adds a menu item called Test Evil 100
-        private void TestEvil100()
-        {
-            AddKarma(KarmaAlignment.Evil, 100); // Pretend the player did an evil act worth 100
-        }
-
-        [ContextMenu("Test Good 5000")] // Adds a menu item called Test Good 5000
-        private void TestGood5000()
-        {
-            AddKarma(KarmaAlignment.Good, 5000); // A huge good act, to check the limit works
-        }
-
-        [ContextMenu("Test Evil 5000")] // Adds a menu item called Test Evil 5000
-        private void TestEvil5000()
-        {
-            AddKarma(KarmaAlignment.Evil, 5000); // A huge evil act, to check the limit works
         }
 
         #endregion

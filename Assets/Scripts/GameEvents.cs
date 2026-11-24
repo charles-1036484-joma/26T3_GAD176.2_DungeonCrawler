@@ -7,7 +7,9 @@ namespace KarmaSystem
 {
     public static class GameEvents
     {
-        public static UnityEvent<int, Karma.KarmaAlignment> onKarmaChange =
-            new UnityEvent<int, Karma.KarmaAlignment>();
+        // Takes two Parameters, an int and a KarmaAlignment (enum: { Evil , Good })
+        // Don't need this in the inspector so can be static
+        public static Action<int, Karma.KarmaAlignment> OnKarmaChange;
+        // Enemy Spawner needs to use this and add to the list. 
     }
 }

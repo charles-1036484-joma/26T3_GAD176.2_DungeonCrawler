@@ -16,12 +16,12 @@ namespace KarmaSystem
 
         private void OnEnable()
         {
-            GameEvents.onKarmaChange.AddListener(KarmaTierChangedCallback);
+            GameEvents.OnKarmaChange += KarmaTierChangedCallback;
         }
 
         private void OnDisable()
         {
-            GameEvents.onKarmaChange.RemoveListener(KarmaTierChangedCallback);
+            GameEvents.OnKarmaChange -= KarmaTierChangedCallback;
         }
 
         public void KarmaTierChangedCallback(int tier, Karma.KarmaAlignment alignment)

@@ -1,5 +1,6 @@
 using KarmaSystem;
 using UnityEngine;
+
 namespace KarmaSystem
 {
     public class Player : CharacterBaseClass
@@ -7,11 +8,6 @@ namespace KarmaSystem
         private Karma playerKarma;
 
         private KarmaTier playerKarmaTier;
-
-        // public Movement playerSpeed; Commenting out for the time being, need to focus on the essentials
-
-        // [SerializeField]
-        // private int playerFearFactor;
 
         [SerializeField]
         private int playerJumpHeight;
@@ -21,20 +17,12 @@ namespace KarmaSystem
 
         protected Karma.KarmaAlignment type;
 
-        // [SerializeField]
-        // private Slider GoodSlider;
-
-        // [SerializeField]
-        // private Slider BadSlider;
-
         #region Unity specific functions
         void Awake()
         {
             // I do not need these here.
-            playerKarma = GetComponent<Karma>(); // Get the Karma "Component" that is attached to the object this Script is attached to
+            playerKarma = GetComponent<Karma>();
             playerKarmaTier = GetComponent<KarmaTier>();
-            // playerSpeed = GetComponent<Movement>();
-            // statsManager = GetComponent<StatsManager>();
         }
 
         void Start()
