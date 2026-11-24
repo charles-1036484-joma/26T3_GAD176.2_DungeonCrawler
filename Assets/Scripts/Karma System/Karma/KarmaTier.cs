@@ -26,7 +26,7 @@ namespace KarmaSystem
 
         public void KarmaTierChangedCallback(int tier, Karma.KarmaAlignment alignment)
         {
-            // Debug.Log("KarmaTierChangedCallback: Karma tier changed. Tier " + tier + " " + alignment);
+            Debug.Log("KarmaTierChangedCallback: Karma tier changed. Tier " + tier + " " + alignment);
         }
 
         public void DisplayKarmaLeaning()

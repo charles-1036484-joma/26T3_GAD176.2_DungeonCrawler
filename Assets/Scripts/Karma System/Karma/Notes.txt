@@ -3,7 +3,7 @@
 #### Decoupling
 
 OnKarmaChanged Action - The Karma System knows nothing about the 'Enemy', Knows nothing
-about the Level Generator, It is just shouting, Hey something has happened, here are the details
+about the Level Generator, It is just shouting, Hey something has happened, here are the details (It removes dependencies)
 
 Used an 'Action' to maintain decoupling, reducing dependencies between components 
 
@@ -22,3 +22,4 @@ Used an 'Action' to maintain decoupling, reducing dependencies between component
 #### Enemy Spawner 
 
 Enemy spawner needs to Subscribe and Add its methods to the onKarmaChanged event. 
+It does not have to do anything with the parameters but it can use them if it wants 

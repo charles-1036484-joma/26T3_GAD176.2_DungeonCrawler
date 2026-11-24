@@ -1,8 +1,4 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace KarmaSystem
 {
@@ -157,17 +153,25 @@ namespace KarmaSystem
         {
             int tierAfterAddingKarma = GetCurrentKarmaTier; // Karma tier at the time of this call
             KarmaAlignment alignmentAfterAddingKarma = GetCurrentKarmaLeaning; // alignment at the time of this call
+            bool tierChanged = false;
+            bool alignmentChanged = false;
 
             if (tierBeforeAddingKarma != tierAfterAddingKarma)
             {
                 // Check if the event is null. If it is not, invoke() the event/action
-                GameEvents.OnKarmaChange?.Invoke(tierAfterAddingKarma, alignmentAfterAddingKarma);
+                tierChanged = true;
                 Debug.Log($"Karma Tier has changed, Character is Tier {tierAfterAddingKarma}");
             }
 
-            if (alignmentBeforeAddingKarma != alignmentAfterAddingKarma)
+            if (tierAfterAddingKarma > 0 && alignmentBeforeAddingKarma != alignmentAfterAddingKarma)
             {
-                // onKarmaChange.Invoke
+                alignmentChanged = true;
+            }
+
+            if (tierChanged || alignmentChanged)
+            {
+                // Invoke all functions subscribed to the Event
+                GameEvents.OnKarmaChange?.Invoke(tierAfterAddingKarma, alignmentAfterAddingKarma);
             }
         }
 
@@ -215,10 +219,6 @@ namespace KarmaSystem
                     else if (GetCurrentKarmaValue <= evilAlignmentThresholdTwo)
                     {
                         return 3;
-                    }
-                    else if (GetCurrentKarmaValue <= evilAlignmentThresholdOne)
-                    {
-                        return 2;
                     }
                     else if (GetCurrentKarmaValue <= evilAlignmentThresholdOne)
                     {
