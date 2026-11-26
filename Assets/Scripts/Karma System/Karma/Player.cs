@@ -1,5 +1,6 @@
 using KarmaSystem;
 using UnityEngine;
+
 namespace KarmaSystem
 {
     public class Player : CharacterBaseClass
@@ -8,38 +9,27 @@ namespace KarmaSystem
 
         private KarmaTier playerKarmaTier;
 
-        // public Movement playerSpeed; Commenting out for the time being, need to focus on the essentials
-
-        // [SerializeField]
-        // private int playerFearFactor;
-
         [SerializeField]
         private int playerJumpHeight;
 
         [SerializeField]
         private StatsManager statsManager;
 
-        protected Karma.KarmaAlignment type;
-
-        // [SerializeField]
-        // private Slider GoodSlider;
-
-        // [SerializeField]
-        // private Slider BadSlider;
+        protected Karma.KarmaAlignment alignment;
 
         #region Unity specific functions
         void Awake()
         {
             // I do not need these here.
-            playerKarma = GetComponent<Karma>(); // Get the Karma "Component" that is attached to the object this Script is attached to
+            playerKarma = GetComponent<Karma>();
             playerKarmaTier = GetComponent<KarmaTier>();
-            // playerSpeed = GetComponent<Movement>();
-            // statsManager = GetComponent<StatsManager>();
         }
 
         void Start()
         {
-            // Debug.Log(playerKarmaTier.);
+            Debug.Log(playerKarma.GetCurrentKarmaValue);
+            Debug.Log(playerKarma.GetCurrentKarmaLeaning);
+            Debug.Log(playerKarma.GetCurrentKarmaTier);
         }
 
         // Update is called once per frame
@@ -56,6 +46,7 @@ namespace KarmaSystem
             */
         }
 
+        // ========== USE THIS FOR WHEN THE PLAYER SAVES A CHARACTER ==================
         // private void OnCollisionEnter(Collision collision)
         // {
         //     if (collision.gameObject.tag == "GoodAct")

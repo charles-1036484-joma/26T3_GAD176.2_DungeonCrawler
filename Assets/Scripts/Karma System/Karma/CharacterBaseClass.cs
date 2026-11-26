@@ -11,14 +11,6 @@ namespace KarmaSystem
         [SerializeField]
         private int health = 100;
 
-        [SerializeField]
-        private enum Action
-        {
-            Good,
-            Neutral,
-            Bad,
-        }
-
         public void DealDamage(int amount) { }
 
         public void TakeDamage(int amount)
