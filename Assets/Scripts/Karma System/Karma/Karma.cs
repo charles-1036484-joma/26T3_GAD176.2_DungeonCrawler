@@ -134,8 +134,6 @@ namespace KarmaSystem
                     + ")"
             );
 
-            //<======= Comment out later ==========>//
-
             // Check if the karma tier has changed
             // Pass the tier before (stored in the temp variable) and the alignmentBeforeAddingKarma as comparisons
             CheckKarmaChange(tierBeforeAddingKarma, alignmentBeforeAddingKarma);

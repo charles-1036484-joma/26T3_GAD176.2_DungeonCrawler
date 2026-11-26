@@ -15,7 +15,7 @@ namespace KarmaSystem
         [SerializeField]
         private StatsManager statsManager;
 
-        protected Karma.KarmaAlignment type;
+        protected Karma.KarmaAlignment alignment;
 
         #region Unity specific functions
         void Awake()
@@ -27,7 +27,9 @@ namespace KarmaSystem
 
         void Start()
         {
-            // Debug.Log(playerKarmaTier.);
+            Debug.Log(playerKarma.GetCurrentKarmaValue);
+            Debug.Log(playerKarma.GetCurrentKarmaLeaning);
+            Debug.Log(playerKarma.GetCurrentKarmaTier);
         }
 
         // Update is called once per frame
@@ -44,6 +46,7 @@ namespace KarmaSystem
             */
         }
 
+        // ========== USE THIS FOR WHEN THE PLAYER SAVES A CHARACTER ==================
         // private void OnCollisionEnter(Collision collision)
         // {
         //     if (collision.gameObject.tag == "GoodAct")
